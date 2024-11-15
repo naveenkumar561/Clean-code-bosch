@@ -1,16 +1,18 @@
-from typing import List, Callable
-Predicate = Callable[[str], bool]
-def starts_with_char(character: str) -> Predicate:
-    return lambda word: word and word[0].lower() == character.lower()
+def starts_with_b(s):
+    return s[0].lower() == 'b' if s else False
 
-def filter_words(words: List[str], predicate: Predicate) -> List[str]:
-    return list(filter(predicate, words))
+def ends_with_b(s):
+    return s[-1].lower() == 'b' if s else False
 
-words = ["Bosch", "bengaluru", "lenovo", "Rusin"]
-character = 'b'
+def filter_strings(names, predicate):
+    return [name for name in names if predicate(name)]
 
-predicate = starts_with_char(character)
+names = ["Bosch", "bengaluru", "lenovo", "BoB"]
 
-result = filter_words(words, predicate)
+# Filter names that start with 'b'
+filtered_names_start = filter_strings(names, starts_with_b)
+print(filtered_names_start)
 
-print(result)
+# Filter names that end with 'b'
+filtered_names_end = filter_strings(names, ends_with_b)
+print(filtered_names_end)
